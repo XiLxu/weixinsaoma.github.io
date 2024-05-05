@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add WeChat Friend</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #wechatQRCode {
+            width: 200px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Scan the QR Code to Add WeChat Friend</h1>
+    <img src="IMG_0" alt="WeChat QR Code" id="wechatQRCode">
+
+    <script>
+        var wechatQRCode = document.getElementById("wechatQRCode");
+        var longPressTimer;
+
+        // 监听触摸开始事件
+        wechatQRCode.addEventListener("touchstart", function(event) {
+            // 阻止默认事件
+            event.preventDefault();
+
+            // 设置一个定时器，在三秒后触发长按事件
+            longPressTimer = setTimeout(function() {
+                // 提示用户是否前往微信添加好友页面
+                var confirmAdd = confirm("Do you want to add this WeChat ID as friend?");
+                if (confirmAdd) {
+                    // 如果用户确认，跳转到微信添加好友页面
+                    window.location.href = "weixin://";
+                }
+            }, 2000);
+        });
+
+        // 监听触摸结束事件
+        wechatQRCode.addEventListener("touchend", function(event) {
+            // 清除长按定时器
+            clearTimeout(longPressTimer);
+        });
+    </script>
+</body>
+</html>
