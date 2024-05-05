@@ -35,54 +35,12 @@
             font-size: 16px;
             color: #333;
         }
-        #wechatButton {
-            display: none; /* 默认隐藏微信按钮 */
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
     <div id="qrCodeContainer">
         <div id="textAboveQRCode">扫二维码加好友</div>
         <img src="IMG_1.jpg" alt="WeChat QR Code" id="qrCode">
-        <button id="wechatButton">Add to WeChat</button>
     </div>
-
-    <script>
-        // 获取元素
-        var qrCodeContainer = document.getElementById('qrCodeContainer');
-        var wechatButton = document.getElementById('wechatButton');
-
-        // 监听长按事件
-        var touchStart = 0;
-        qrCodeContainer.addEventListener('touchstart', function(event) {
-            touchStart = event.timeStamp;
-        });
-        qrCodeContainer.addEventListener('touchend', function(event) {
-            var touchEnd = event.timeStamp;
-            if (touchEnd - touchStart >= 1000) {
-                if (confirm("是否跳转到微信添加好友页面？")) {
-                    // 此处替换为跳转微信的逻辑
-                    alert('跳转到微信添加好友页面');
-                }
-            }
-        });
-
-        // 点击按钮跳转到微信
-        wechatButton.addEventListener('click', function() {
-            // 此处替换为跳转微信的逻辑
-            alert('跳转到微信添加好友页面');
-        });
-    </script>
 </body>
 </html>
