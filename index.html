@@ -22,7 +22,7 @@
             margin-bottom: 20px;
         }
         #qrCode {
-            width: 70%; /* 调整二维码的大小 */
+            max-width: 90%; /* 调整二维码的大小 */
             height: auto;
             display: block;
             margin: 0 auto; /* 让二维码居中显示 */
@@ -53,8 +53,8 @@
 </head>
 <body>
     <div id="qrCodeContainer">
-        <div id="textAboveQRCode">Scan the QR Code to Add WeChat Friend</div>
-        <img src="images/IMG_0.jpg" alt="WeChat QR Code" id="qrCode">
+        <div id="textAboveQRCode">扫二维码加好友</div>
+        <img src="wechat_qr_code.jpg" alt="WeChat QR Code" id="qrCode">
         <button id="wechatButton">Add to WeChat</button>
     </div>
 
@@ -62,16 +62,20 @@
         // 获取元素
         var qrCodeContainer = document.getElementById('qrCodeContainer');
         var wechatButton = document.getElementById('wechatButton');
-        var touchStart = 0;
 
         // 监听长按事件
+        var touchStart = 0;
         qrCodeContainer.addEventListener('touchstart', function(event) {
             touchStart = event.timeStamp;
-            setTimeout(function() {
-                if (event.timeStamp - touchStart >= 1000) {
-                    wechatButton.style.display = 'block';
+        });
+        qrCodeContainer.addEventListener('touchend', function(event) {
+            var touchEnd = event.timeStamp;
+            if (touchEnd - touchStart >= 1000) {
+                if (confirm("是否跳转到微信添加好友页面？")) {
+                    // 此处替换为跳转微信的逻辑
+                    alert('跳转到微信添加好友页面');
                 }
-            }, 1000);
+            }
         });
 
         // 点击按钮跳转到微信
