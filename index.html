@@ -60,18 +60,18 @@
 
     <script>
         // 获取元素
-        var qrCode = document.getElementById('qrCode');
+        var qrCodeContainer = document.getElementById('qrCodeContainer');
         var wechatButton = document.getElementById('wechatButton');
         var touchStart = 0;
 
         // 监听长按事件
-        qrCode.addEventListener('touchstart', function(event) {
+        qrCodeContainer.addEventListener('touchstart', function(event) {
             touchStart = event.timeStamp;
             setTimeout(function() {
-                if (event.timeStamp - touchStart >= 2000) {
+                if (event.timeStamp - touchStart >= 1000) {
                     wechatButton.style.display = 'block';
                 }
-            }, 2000);
+            }, 1000);
         });
 
         // 点击按钮跳转到微信
