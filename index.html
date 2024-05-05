@@ -13,43 +13,71 @@
             padding: 0;
             height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
-        #wechatQRCode {
-            width: 200px;
+        #qrCodeContainer {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        #qrCode {
+            width: 70%; /* 调整二维码的大小 */
             height: auto;
+            display: block;
+            margin: 0 auto; /* 让二维码居中显示 */
+        }
+        #textAboveQRCode {
+            position: absolute;
+            top: -30px; /* 调整文字的位置 */
+            left: 0;
+            right: 0;
+            font-size: 16px;
+            color: #333;
+        }
+        #wechatButton {
+            display: none; /* 默认隐藏微信按钮 */
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <h1>Scan the QR Code to Add WeChat Friend</h1>
-    <img src="IMG_0" alt="WeChat QR Code" id="wechatQRCode">
+    <div id="qrCodeContainer">
+        <div id="textAboveQRCode">Scan the QR Code to Add WeChat Friend</div>
+        <img src="wechat_qr_code.jpg" alt="WeChat QR Code" id="qrCode">
+        <button id="wechatButton">Add to WeChat</button>
+    </div>
 
     <script>
-        var wechatQRCode = document.getElementById("wechatQRCode");
-        var longPressTimer;
+        // 获取元素
+        var qrCode = document.getElementById('qrCode');
+        var wechatButton = document.getElementById('wechatButton');
+        var touchStart = 0;
 
-        // 监听触摸开始事件
-        wechatQRCode.addEventListener("touchstart", function(event) {
-            // 阻止默认事件
-            event.preventDefault();
-
-            // 设置一个定时器，在三秒后触发长按事件
-            longPressTimer = setTimeout(function() {
-                // 提示用户是否前往微信添加好友页面
-                var confirmAdd = confirm("Do you want to add this WeChat ID as friend?");
-                if (confirmAdd) {
-                    // 如果用户确认，跳转到微信添加好友页面
-                    window.location.href = "weixin://";
+        // 监听长按事件
+        qrCode.addEventListener('touchstart', function(event) {
+            touchStart = event.timeStamp;
+            setTimeout(function() {
+                if (event.timeStamp - touchStart >= 2000) {
+                    wechatButton.style.display = 'block';
                 }
             }, 2000);
         });
 
-        // 监听触摸结束事件
-        wechatQRCode.addEventListener("touchend", function(event) {
-            // 清除长按定时器
-            clearTimeout(longPressTimer);
+        // 点击按钮跳转到微信
+        wechatButton.addEventListener('click', function() {
+            // 此处替换为跳转微信的逻辑
+            alert('跳转到微信添加好友页面');
         });
     </script>
 </body>
